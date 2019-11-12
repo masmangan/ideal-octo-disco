@@ -64,14 +64,16 @@ public class ChromeTest {
         WebDriverWait wait = new WebDriverWait(driver, 30);
         driver.get("http://10.32.161.142:8080/owners/5");
         driver.findElement(By.xpath("//a[@href=\"5/pets/new\"]")).click();
-       // wait.until(presenceOfElementLocated(searchInput));
-        //driver.findElement(searchInput).sendKeys("Software");
-       // By searchButton = By.id("searchButton");
-       // wait.until(elementToBeClickable(searchButton));
-       //.findElement(searchButton).click();
-       
+        //wait.until(presenceOfElementLocated(searchInput));
+        driver.findElement(By.id("name")).sendKeys("Tobby");
+        driver.findElement(By.id("birthDate")).sendKeys("2014-05-31");
+        driver.findElement(By.name("type")).sendKeys("dog");
+        By searchButton = By.xpath("/html/body/div/div/form/div[2]/div/button");
+        wait.until(elementToBeClickable(searchButton));
+       driver.findElement(searchButton).click();
+             
         wait.until(textToBePresentInElementLocated(By.tagName("body"),
-                "New\nPet"));
+                "Tobby"));
         
     }
 
