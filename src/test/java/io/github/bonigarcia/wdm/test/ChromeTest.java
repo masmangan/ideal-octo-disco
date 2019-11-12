@@ -73,6 +73,8 @@ public class ChromeTest {
        driver.findElement(searchButton).click();
              
         wait.until(textToBePresentInElementLocated(By.tagName("body"),
+                "New\nPet"));
+        wait.until(textToBePresentInElementLocated(By.tagName("body"),
                 "Tobby"));
         
     }
