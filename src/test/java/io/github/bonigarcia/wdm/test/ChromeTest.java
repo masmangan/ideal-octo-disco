@@ -61,18 +61,36 @@ public class ChromeTest {
 
     @Test
     public void test() {
-        // Your test code here. For example:
+            // Your test code here. For example:
         WebDriverWait wait = new WebDriverWait(driver, 30);
-        driver.get("https://en.wikipedia.org/wiki/Main_Page");
-        By searchInput = By.id("searchInput");
-        wait.until(presenceOfElementLocated(searchInput));
-        driver.findElement(searchInput).sendKeys("Software");
-        By searchButton = By.id("searchButton");
-        wait.until(elementToBeClickable(searchButton));
-        driver.findElement(searchButton).click();
-
-        wait.until(textToBePresentInElementLocated(By.tagName("body"),
-                "Computer software"));
+        driver.get("http://10.32.161.142:8080/owners/find");
+        By addOwner = By.linkText("Add Owner");
+        wait.until(elementToBeClickable(addOwner));
+        driver.findElement(addOwner).click();
+        
+        By name = By.name("firstName");
+        wait.until(presenceOfElementLocated(name));
+        driver.findElement(name).sendKeys("Teste");
+        
+        By lastName = By.name("lastName");
+        wait.until(presenceOfElementLocated(lastName));
+        driver.findElement(lastName).sendKeys("Segundo Nome");
+        
+        By address = By.name("address");
+        wait.until(presenceOfElementLocated(address));
+        driver.findElement(address).sendKeys("Caxias");
+        
+        By city = By.name("city");
+        wait.until(presenceOfElementLocated(city));
+        driver.findElement(city).sendKeys("Eldorado");
+        
+        By telephone = By.name("telephone");
+        wait.until(presenceOfElementLocated(telephone));
+        driver.findElement(telephone).sendKeys("5512345679");  
+        
+        By addOwnerSubmit = By.xpath("//*[@id=\"add-owner-form\"]/div[2]/div/button");
+        wait.until(elementToBeClickable(addOwnerSubmit));
+        driver.findElement(addOwnerSubmit).click();
     }
 
 }
