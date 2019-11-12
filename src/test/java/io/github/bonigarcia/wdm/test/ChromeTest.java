@@ -17,6 +17,7 @@
 
 package io.github.bonigarcia.wdm.test;
 
+import static org.junit.Assert.assertEquals;
 import static org.openqa.selenium.support.ui.ExpectedConditions.elementToBeClickable;
 import static org.openqa.selenium.support.ui.ExpectedConditions.presenceOfElementLocated;
 import static org.openqa.selenium.support.ui.ExpectedConditions.textToBePresentInElementLocated;
@@ -59,20 +60,35 @@ public class ChromeTest {
         }
     }
 
+//    @Test
+//    public void test() {
+//        // Your test code here. For example:
+//        WebDriverWait wait = new WebDriverWait(driver, 30);
+//        driver.get("https://en.wikipedia.org/wiki/Main_Page");   
+//        By searchInput = By.id("searchInput");
+//        wait.until(presenceOfElementLocated(searchInput));
+//        driver.findElement(searchInput).sendKeys("Software");
+//        By searchButton = By.id("searchButton");
+//        wait.until(elementToBeClickable(searchButton));
+//        driver.findElement(searchButton).click();
+//
+//        wait.until(textToBePresentInElementLocated(By.tagName("body"),
+//                "Computer software"));
+//    }
+    
     @Test
-    public void test() {
+    public void testErrorPage() {
         // Your test code here. For example:
         WebDriverWait wait = new WebDriverWait(driver, 30);
-        driver.get("https://en.wikipedia.org/wiki/Main_Page");
-        By searchInput = By.id("searchInput");
-        wait.until(presenceOfElementLocated(searchInput));
-        driver.findElement(searchInput).sendKeys("Software");
-        By searchButton = By.id("searchButton");
-        wait.until(elementToBeClickable(searchButton));
-        driver.findElement(searchButton).click();
-
-        wait.until(textToBePresentInElementLocated(By.tagName("body"),
-                "Computer software"));
+        driver.get("http://10.32.161.142:8080/kkkkkk");  
+        By text = By.tagName("h2");
+        wait.until(presenceOfElementLocated(text));
+        String errorText = driver.findElement(text).getText();
+        
+        assertEquals("Something happened...", errorText);
+      
     }
+    
+    
 
 }
