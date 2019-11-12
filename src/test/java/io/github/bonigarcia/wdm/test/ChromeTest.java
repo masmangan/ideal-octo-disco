@@ -61,7 +61,7 @@ public class ChromeTest {
 
     @Test
     public void test() {
-            // Your test code here. For example:
+          // Your test code here. For example:
         WebDriverWait wait = new WebDriverWait(driver, 30);
         driver.get("http://10.32.161.142:8080/owners/find");
         By addOwner = By.linkText("Add Owner");
@@ -91,6 +91,9 @@ public class ChromeTest {
         By addOwnerSubmit = By.xpath("//*[@id=\"add-owner-form\"]/div[2]/div/button");
         wait.until(elementToBeClickable(addOwnerSubmit));
         driver.findElement(addOwnerSubmit).click();
+        
+        wait.until(textToBePresentInElementLocated(By.xpath("/html/body/div/div/h2[1]"),
+                "Owner Information"));   
     }
 
 }
