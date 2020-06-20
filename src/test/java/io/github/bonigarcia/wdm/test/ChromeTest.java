@@ -74,5 +74,20 @@ public class ChromeTest {
         wait.until(textToBePresentInElementLocated(By.tagName("body"),
                 "Computer software"));
     }
+    
+    @Test
+    public void testWikipediaLibertadores17() {
+    	 WebDriverWait wait = new WebDriverWait(driver, 30);
+         driver.get("https://pt.wikipedia.org/wiki/Wikip%C3%A9dia:P%C3%A1gina_principal");
+         By searchInput = By.id("searchInput");
+         wait.until(presenceOfElementLocated(searchInput));
+         driver.findElement(searchInput).sendKeys("Libertadores 2017");
+         By searchButton = By.id("searchButton");
+         wait.until(elementToBeClickable(searchButton));
+         driver.findElement(searchButton).click();
+
+         wait.until(textToBePresentInElementLocated(By.tagName("body"),
+                 "Grêmio"));
+    }
 
 }
