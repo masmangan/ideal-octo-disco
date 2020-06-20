@@ -17,9 +17,9 @@
 
 package io.github.bonigarcia.wdm.test;
 
+import static org.junit.Assert.assertEquals;
 import static org.openqa.selenium.support.ui.ExpectedConditions.elementToBeClickable;
 import static org.openqa.selenium.support.ui.ExpectedConditions.presenceOfElementLocated;
-import static org.openqa.selenium.support.ui.ExpectedConditions.textToBePresentInElementLocated;
 
 import org.junit.After;
 import org.junit.Before;
@@ -60,19 +60,58 @@ public class ChromeTest {
     }
 
     @Test
-    public void test() {
+    public void testAddNewOwner() {
+        // Your test code here. For example:
+        WebDriverWait wait = new WebDriverWait(driver, 300);
+        driver.get("http://10.32.161.142:8080/owners/find");
+        By btnAddOwners = By.linkText("Add Owner");
+        wait.until(presenceOfElementLocated(btnAddOwners));
+        wait.until(elementToBeClickable(btnAddOwners));
+        driver.findElement(btnAddOwners).click();
+        
+        assertEquals("http://10.32.161.142:8080/owners/new", driver.getCurrentUrl());
+        
+        By fieldFirstName = By.id("firstName");
+        By fieldLastName = By.id("lastName");
+        By fieldAddress = By.id("address");
+        By fieldCity = By.id("city");
+        By fieldTelephone = By.id("telephone");
+        btnAddOwners = By.xpath("//*[@id='add-owner-form']/div[2]/div/button");
+        
+        wait.until(presenceOfElementLocated(fieldTelephone));
+        
+        String firstNameVal = "Nome";
+        String fieldLastNameVal = "Qualquer";
+        String fieldAddressVal = "Endereço, 380";
+        String fieldCityVal = "Porto Alegre";
+        String fieldTelephoneVal = "999999";
+        
+        driver.findElement(fieldFirstName).sendKeys(firstNameVal);
+        driver.findElement(fieldLastName).sendKeys(fieldLastNameVal);
+        driver.findElement(fieldAddress).sendKeys(fieldAddressVal);
+        driver.findElement(fieldCity).sendKeys(fieldCityVal);
+        driver.findElement(fieldTelephone).sendKeys(fieldTelephoneVal);
+        
+        driver.findElement(btnAddOwners).click();
+        
+        By btnEditOwners = By.linkText("Edit Owner");
+        wait.until(presenceOfElementLocated(btnEditOwners));
+        wait.until(elementToBeClickable(btnEditOwners));
+    }
+    
+    @Test
+    public void testErrorPage() {
         // Your test code here. For example:
         WebDriverWait wait = new WebDriverWait(driver, 30);
-        driver.get("https://en.wikipedia.org/wiki/Main_Page");
-        By searchInput = By.id("searchInput");
-        wait.until(presenceOfElementLocated(searchInput));
-        driver.findElement(searchInput).sendKeys("Software");
-        By searchButton = By.id("searchButton");
-        wait.until(elementToBeClickable(searchButton));
-        driver.findElement(searchButton).click();
-
-        wait.until(textToBePresentInElementLocated(By.tagName("body"),
-                "Computer software"));
+        driver.get("http://10.32.161.142:8080/kkkkkk");  
+        By text = By.tagName("h2");
+        wait.until(presenceOfElementLocated(text));
+        String errorText = driver.findElement(text).getText();
+        
+        assertEquals("Something happened...", errorText);
+      
     }
+    
+    
 
 }
