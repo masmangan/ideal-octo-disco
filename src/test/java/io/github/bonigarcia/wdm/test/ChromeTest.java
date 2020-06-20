@@ -89,5 +89,19 @@ public class ChromeTest {
          wait.until(textToBePresentInElementLocated(By.tagName("body"),
                  "Grêmio"));
     }
+    
+    @Test
+    public void testAmericanas() {
+        WebDriverWait wait = new WebDriverWait(driver, 30);
+        driver.get("https://www.americanas.com.br/");
+        By searchInput = By.id("h_search-input");
+        wait.until(presenceOfElementLocated(searchInput));
+        driver.findElement(searchInput).sendKeys("Notebook");
+        By searchButton = By.id("h_search-btn");
+        wait.until(elementToBeClickable(searchButton));
+        driver.findElement(searchButton).click();
+        wait.until(textToBePresentInElementLocated(By.tagName("body"),
+                "notebook"));
+    }
 
 }
