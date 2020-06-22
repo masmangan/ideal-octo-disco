@@ -60,19 +60,33 @@ public class ChromeTest {
     }
 
     @Test
-    public void test() {
+    public void testNaruto() {
         // Your test code here. For example:
         WebDriverWait wait = new WebDriverWait(driver, 30);
-        driver.get("https://en.wikipedia.org/wiki/Main_Page");
+        driver.get("https://pt.wikipedia.org/wiki/Wikip%C3%A9dia:P%C3%A1gina_principal");
         By searchInput = By.id("searchInput");
         wait.until(presenceOfElementLocated(searchInput));
-        driver.findElement(searchInput).sendKeys("Software");
+        driver.findElement(searchInput).sendKeys("Naruto");
         By searchButton = By.id("searchButton");
         wait.until(elementToBeClickable(searchButton));
         driver.findElement(searchButton).click();
-
         wait.until(textToBePresentInElementLocated(By.tagName("body"),
-                "Computer software"));
+                "Raposa de Nove Caudas"));
+    }
+    
+    @Test
+    public void testSasuke() {
+        // Your test code here. For example:
+        WebDriverWait wait = new WebDriverWait(driver, 30);
+        driver.get("https://pt.wikipedia.org/wiki/Wikip%C3%A9dia:P%C3%A1gina_principal");
+        By searchInput = By.id("searchInput");
+        wait.until(presenceOfElementLocated(searchInput));
+        driver.findElement(searchInput).sendKeys("Sasuke");
+        By searchButton = By.id("searchButton");
+        wait.until(elementToBeClickable(searchButton));
+        driver.findElement(searchButton).click();
+        wait.until(textToBePresentInElementLocated(By.tagName("body"),
+                "Mangekyou Sharingan"));
     }
     
     @Test
@@ -103,5 +117,4 @@ public class ChromeTest {
         wait.until(textToBePresentInElementLocated(By.tagName("body"),
                 "notebook"));
     }
-
 }
