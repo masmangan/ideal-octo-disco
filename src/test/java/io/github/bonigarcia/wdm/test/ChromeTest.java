@@ -79,4 +79,20 @@ public class ChromeTest {
         wait.until(presenceOfElementLocated(videoPlayer));
     }
 
+    @Test
+    public void openImdbPage() {
+        driver.get("https://www.imdb.com/");
+
+        By searchInput = By.name("q");
+        wait.until(presenceOfElementLocated(searchInput));
+
+        driver.findElement(searchInput).sendKeys("forrest gump", Keys.RETURN);
+        By moviePageLink = By.xpath("//*[@id='main']/div/div[2]/table/tbody/tr[1]/td[2]/a");
+        wait.until(presenceOfElementLocated(moviePageLink));
+        driver.findElement(moviePageLink).click();
+
+        By mainActorLink = By.linkText("Tom Hanks");
+        wait.until(presenceOfElementLocated(mainActorLink));
+    }
+
 }
