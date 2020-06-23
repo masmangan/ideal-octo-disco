@@ -17,6 +17,8 @@
 
 package io.github.bonigarcia.wdm.test;
 
+import java.util.Random;
+
 import static org.openqa.selenium.support.ui.ExpectedConditions.elementToBeClickable;
 import static org.openqa.selenium.support.ui.ExpectedConditions.presenceOfElementLocated;
 import static org.openqa.selenium.support.ui.ExpectedConditions.textToBePresentInElementLocated;
@@ -29,6 +31,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.Keys;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
@@ -41,6 +44,7 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 public class ChromeTest {
 
     private WebDriver driver;
+    private WebDriverWait wait;
 
     @BeforeClass
     public static void setupClass() {
@@ -50,6 +54,7 @@ public class ChromeTest {
     @Before
     public void setupTest() {
         driver = new ChromeDriver();
+        wait = new WebDriverWait(driver, 30);
     }
 
     @After
@@ -71,8 +76,55 @@ public class ChromeTest {
         wait.until(elementToBeClickable(searchButton));
         driver.findElement(searchButton).click();
 
-        wait.until(textToBePresentInElementLocated(By.tagName("body"),
-                "Computer software"));
+        wait.until(textToBePresentInElementLocated(By.tagName("body"), "Computer software"));
+    }
+
+    @Test
+    public void testJovemNerdNerdCastRpg() {
+        driver.get("https://jovemnerd.com.br/nerdcast/");
+
+        By searchInput = By.xpath("//input[@placeholder='Pesquisar NerdCast...']");
+        wait.until(presenceOfElementLocated(searchInput));
+        driver.findElement(searchInput).sendKeys("call of cthulhu" + Keys.ENTER);
+
+        By podCast = By.xpath(
+                "//a[@href='https://jovemnerd.com.br/nerdcast/rpg-call-of-cthulhu-3-o-despertar-dos-profundos/']");
+        wait.until(presenceOfElementLocated(podCast));
+        driver.findElement(podCast).click();
+
+        By playButton = By.className("play-podcast");
+        wait.until(presenceOfElementLocated(playButton));
+    }
+
+    @Test
+    public void testCasdastro() {
+        Random randomNumber = new Random();
+
+        driver.get("https://react-redux.realworld.io/#/register?_k=yfsp7y");
+
+        By userNameInput = By.xpath("//input[@placeholder='Username']");
+        By emailInput = By.xpath("//input[@placeholder='Email']");
+        By passwordInput = By.xpath("//input[@placeholder='Password']");
+
+        String newName = "qptest" + randomNumber.nextInt(10000);
+
+        // Preenche o formulario
+        wait.until(presenceOfElementLocated(userNameInput));
+        driver.findElement(userNameInput).sendKeys(newName);
+
+        wait.until(presenceOfElementLocated(emailInput));
+        driver.findElement(emailInput).sendKeys("qptest" + randomNumber.nextInt(10000) + "@email.com");
+
+        wait.until(presenceOfElementLocated(passwordInput));
+        driver.findElement(passwordInput).sendKeys("P4ssW0rdT3st");
+
+        // Submit
+        By submitButton = By.className("btn");
+        driver.findElement(submitButton).click();
+
+        // Busca pela label do nome do usuário criado que foi logado
+        By userLabel = By.xpath("//a[@href='#@" + newName + "']");
+        wait.until(presenceOfElementLocated(userLabel));
     }
 
 }
