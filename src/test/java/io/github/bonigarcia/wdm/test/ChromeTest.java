@@ -61,8 +61,47 @@ public class ChromeTest {
 			driver.quit();
 		}
 	}
+	
+	
+	@Test public void testGoogle() { 
+		 WebDriverWait wait = new WebDriverWait(driver, 30);
+		 driver.get("https://www.thinkwithgoogle.com/intl/pt-br/");
+		 
+		 By searchIcon = By.className("search-form-container");
+		 driver.findElement(searchIcon).click();
+		 
+		 By searchInput = By.id("search-form-input");
+		 wait.until(presenceOfElementLocated(searchInput));
+		 driver.findElement(searchInput).sendKeys("COVID");
+		 
+		 By searchButton = By.className("search-form__submit");
+		 wait.until(elementToBeClickable(searchButton));
+		 driver.findElement(searchButton).click();
+		 
+		 wait.until(textToBePresentInElementLocated(By.className(
+		 "unified-search__source-button"), "Resultados"));
+	 }
 	 
-
+	 @Test public void testMoodle() { 
+		 
+		 WebDriverWait wait = new WebDriverWait(driver, 30);
+		 driver.get("https://moodle.pucrs.br/");
+		 
+		 By user = By.id("login_username");
+		 wait.until(presenceOfElementLocated(user));
+		 driver.findElement(user).sendKeys("Matricula Aluno"); By pass =
+		 By.id("login_password"); wait.until(presenceOfElementLocated(pass));
+		 driver.findElement(pass).sendKeys("senhadoaluno");
+		 
+		 By searchButton = By.className("button");
+		 wait.until(elementToBeClickable(searchButton));
+		 driver.findElement(searchButton).click();
+		 
+		 wait.until(textToBePresentInElementLocated(By.id("loginerrormessage"),
+		 "Nome de usuário ou senha errados. Por favor tente outra vez."));
+	 }
+	 
+	
 	@Test
 		public void testCadastro() {
 			WebDriverWait wait = new WebDriverWait(driver, 30);
@@ -106,7 +145,7 @@ public class ChromeTest {
 			
 			By email = By.id("email");
 			wait.until(presenceOfElementLocated(email));
-			driver.findElement(email).sendKeys("umemaildealuno@testess.com.br");
+			driver.findElement(email).sendKeys("umemaildealuno2@testess.com.br");
 
 			By pass = By.id("password");
 			wait.until(presenceOfElementLocated(pass));
