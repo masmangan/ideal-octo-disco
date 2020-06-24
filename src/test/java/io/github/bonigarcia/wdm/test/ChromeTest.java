@@ -27,7 +27,9 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -63,24 +65,40 @@ public class ChromeTest {
         }
     }
 
-//    @Test
-//    public void test() {
-//        // Your test code here. For example:
-//        WebDriverWait wait = new WebDriverWait(driver, 30);
-//        driver.get("https://en.wikipedia.org/wiki/Main_Page");
-//        By searchInput = By.id("searchInput");
-//        wait.until(presenceOfElementLocated(searchInput));
-//        driver.findElement(searchInput).sendKeys("Software");
-//        By searchButton = By.id("searchButton");
-//        wait.until(elementToBeClickable(searchButton));
-//        driver.findElement(searchButton).click();
-//
-//        wait.until(textToBePresentInElementLocated(By.tagName("body"),
-//                "Computer software"));
-//    }
+    @Test
+    public void test() {
+        // Your test code here. For example:
+        WebDriverWait wait = new WebDriverWait(driver, 30);
+        driver.get("https://en.wikipedia.org/wiki/Main_Page");
+        By searchInput = By.id("searchInput");
+        wait.until(presenceOfElementLocated(searchInput));
+        driver.findElement(searchInput).sendKeys("Software");
+        By searchButton = By.id("searchButton");
+        wait.until(elementToBeClickable(searchButton));
+        driver.findElement(searchButton).click();
+
+        wait.until(textToBePresentInElementLocated(By.tagName("body"),
+                "Computer software"));
+    }
 
     @Test
-    public void testSearchCourse() throws InterruptedException {
+    public void testOlxSearchAnuncio() throws InterruptedException {
+        WebDriverWait wait = new WebDriverWait(driver, 30);
+        driver.get("https://rs.olx.com.br/");
+
+        WebElement elemento = driver.findElement(By.name("q"));
+        elemento.click();
+
+        By searchInput = By.id("searchtext");
+        wait.until(presenceOfElementLocated(searchInput));
+        driver.findElement(searchInput).sendKeys("cbr 600 rr", Keys.ENTER);
+
+        wait.until(textToBePresentInElementLocated(By.tagName("body"),
+                "R$ 28.000"));
+    }
+
+    @Test
+    public void testSearchLeilao() throws InterruptedException {
         WebDriverWait wait = new WebDriverWait(driver, 30);
         driver.get("https://www.leiloes.com.br");
         By closePopUp = By.id("botaoFecharBanner");
@@ -88,24 +106,15 @@ public class ChromeTest {
         wait.until(elementToBeClickable(closePopUp));
         driver.findElement(closePopUp).click();
 
-        By buttonVeiculo = By.xpath("//button[contains(.,'Veículos')]");
-        wait.until(elementToBeClickable(buttonVeiculo));
-        driver.findElement(buttonVeiculo).click();
+        By menuPesquisa = By.xpath("//*[@id=\"content\"]/div/div[2]/div[1]/div/span/span[1]/button/span");
+        wait.until(elementToBeClickable(menuPesquisa));
+        driver.findElement(menuPesquisa).click();
 
-        Thread.sleep(10000);
-//        Select dropdown = new Select(driver.findElement(By.tagName("select")));
+        By inputPesquisa = By.name("texto");
+        wait.until(presenceOfElementLocated(inputPesquisa));
+        driver.findElement(inputPesquisa).sendKeys("cbr", Keys.ENTER);
 
-
-//        By filtro = By.id("botaoFiltrar");
-//        Thread.sleep(5000);
-//        wait.until(elementToBeClickable(closePopUp));
-//        driver.findElement(closePopUp).click();
-
-//        By searchInputSearchCourse = By.id("s");
-//        wait.until(presenceOfElementLocated(searchInputSearchCourse));
-//        driver.findElement(searchInputSearchCourse).sendKeys("Sistemas de informação");
-//
-//        wait.until(textToBePresentInElementLocated(By.tagName("body"),
-//                "Nenhum curso encontrado no momento, veja os cursos com inscrições encerradas e manifeste seu interesse."));
+        wait.until(textToBePresentInElementLocated(By.tagName("body"),
+                "Nenhum lote para esta categoria"));
     }
 }
