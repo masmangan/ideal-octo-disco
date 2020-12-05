@@ -75,4 +75,46 @@ public class ChromeTest {
                 "Computer software"));
     }
 
+    @Test
+    public void testLoginInvalido() {
+        WebDriverWait wait = new WebDriverWait(driver, 60);
+        driver.get("https://en.wikipedia.org/w/index.php?title=Special:UserLogin&returnto=Main+Page");
+
+        By userLogin = By.id("wpName1");
+        wait.until(presenceOfElementLocated(userLogin));
+        driver.findElement(userLogin).sendKeys("testeUser");
+
+        By userPassword = By.id("wpPassword1");
+        wait.until(presenceOfElementLocated(userPassword));
+        driver.findElement(userPassword).sendKeys("testePassword");
+
+        By loginButton = By.id("wpLoginAttempt");
+        wait.until(elementToBeClickable(loginButton));
+        driver.findElement(loginButton).click();
+
+        wait.until(textToBePresentInElementLocated(By.className("errorbox"),
+                "Incorrect username or password entered. Please try again."));
+    }
+
+    @Test
+    public void testLoginValido() {
+        WebDriverWait wait = new WebDriverWait(driver, 60);
+        driver.get("https://en.wikipedia.org/w/index.php?title=Special:UserLogin&returnto=Main+Page");
+
+        By userLogin = By.id("wpName1");
+        wait.until(presenceOfElementLocated(userLogin));
+        driver.findElement(userLogin).sendKeys("Testeqp");
+
+        By userPassword = By.id("wpPassword1");
+        wait.until(presenceOfElementLocated(userPassword));
+        driver.findElement(userPassword).sendKeys("testePassword");
+
+        By loginButton = By.id("wpLoginAttempt");
+        wait.until(elementToBeClickable(loginButton));
+        driver.findElement(loginButton).click();
+
+        wait.until(textToBePresentInElementLocated(By.tagName("body"),
+                "Testeqp"));
+    }
+
 }
