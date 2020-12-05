@@ -21,6 +21,8 @@ import static org.openqa.selenium.support.ui.ExpectedConditions.elementToBeClick
 import static org.openqa.selenium.support.ui.ExpectedConditions.presenceOfElementLocated;
 import static org.openqa.selenium.support.ui.ExpectedConditions.textToBePresentInElementLocated;
 
+import java.util.Random;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -75,4 +77,67 @@ public class ChromeTest {
                 "Computer software"));
     }
 
+    @Test
+    public void testJoinExpo() {
+    	WebDriverWait wait = new WebDriverWait(driver, 30);
+    	
+    	String username = "edgindri" + new Random().nextInt(Integer.MAX_VALUE);
+    	String email = username + "@gmail.com";
+    	String password = "12345678@abc";
+    	
+    	driver.get("https://expo.io/");
+    	
+    	By joinButton = By.xpath("//a[contains(., 'Sign Up')]");
+    	wait.until(presenceOfElementLocated(joinButton));
+    	driver.findElement(joinButton).click();
+    	
+    	By emailField = By.id("email");
+    	wait.until(presenceOfElementLocated(emailField));
+    	driver.findElement(emailField).sendKeys(email);
+    	
+    	By usernameField = By.id("username");
+    	wait.until(presenceOfElementLocated(usernameField));
+    	driver.findElement(usernameField).sendKeys(username);
+    	
+    	By passwordField = By.id("password");
+    	wait.until(presenceOfElementLocated(passwordField));
+		driver.findElement(passwordField).sendKeys(password);
+
+    	By confirmPasswordField = By.id("confirmPassword");
+    	wait.until(presenceOfElementLocated(confirmPasswordField));
+    	driver.findElement(confirmPasswordField).sendKeys(password);
+
+    	By signUpButton = By.xpath("//button[contains(., 'Sign Up')]");
+    	wait.until(presenceOfElementLocated(signUpButton));
+    	driver.findElement(signUpButton).click();
+    	
+    	wait.until(presenceOfElementLocated(By.xpath("//span[contains(., 'Home')]")));
+    }
+    
+    @Test
+    public void testLoginExpo() {
+    	WebDriverWait wait = new WebDriverWait(driver, 30);
+    	
+    	driver.get("https://expo.io/");
+    	
+    	By loginButton = By.xpath("//a[contains(., 'Log In')]");
+    	wait.until(presenceOfElementLocated(loginButton));
+    	driver.findElement(loginButton).click();
+    	
+    	By usernameField = By.id("username");
+    	wait.until(presenceOfElementLocated(usernameField));
+    	driver.findElement(usernameField).sendKeys("edgindri1");
+
+    	String password = "12345678@abc";
+    	
+    	By passwordField = By.id("password");
+    	wait.until(presenceOfElementLocated(passwordField));
+		driver.findElement(passwordField).sendKeys(password);
+
+    	loginButton = By.xpath("//button[contains(., 'Log In')]");
+    	wait.until(presenceOfElementLocated(loginButton));
+    	driver.findElement(loginButton).click();
+    	
+    	wait.until(presenceOfElementLocated(By.xpath("//span[contains(., 'Home')]")));
+    }
 }
