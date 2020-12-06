@@ -74,5 +74,25 @@ public class ChromeTest {
         wait.until(textToBePresentInElementLocated(By.tagName("body"),
                 "Computer software"));
     }
+    
+    	 @Test public void buscaQualidaProdutoMoodlePucrs() { 
+		 
+		 WebDriverWait wait = new WebDriverWait(driver, 30);
+		 driver.get("https://moodle.pucrs.br/");
+		 
+		 By user = By.id("login_username");
+		 wait.until(presenceOfElementLocated(user));
+		 driver.findElement(user).sendKeys("11109498"); 
+                 
+                 By pass =  By.id("login_password"); wait.until(presenceOfElementLocated(pass));
+		 driver.findElement(pass).sendKeys("gatoodin");
+		 
+		 By searchButton = By.className("button");
+		 wait.until(elementToBeClickable(searchButton));
+		 driver.findElement(searchButton).click();
+                 
+                wait.until(textToBePresentInElementLocated(By.tagName("body"),
+                "Qualidade de Produto"));
+	 }
 
 }
