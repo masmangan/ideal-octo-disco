@@ -117,4 +117,30 @@ public class ChromeTest {
                 "Testeqp"));
     }
 
+    @Test
+    public void testPressLogIn() {
+        WebDriverWait wait = new WebDriverWait(driver, 60);
+        driver.get("https://en.wikipedia.org/wiki/Main_Page");
+
+        By buttonLogIn = By.id("pt-login");
+        wait.until(elementToBeClickable(buttonLogIn));
+        driver.findElement(buttonLogIn).click();
+
+        wait.until(textToBePresentInElementLocated(By.tagName("body"),
+                "Username"));
+    }
+
+    @Test
+    public void testPressLogInOnYT() {
+        WebDriverWait wait = new WebDriverWait(driver, 60);
+        driver.get("https://www.miniclip.com/games/br/#");
+
+        By buttonLogIn = By.id("third-party-fb-login");
+        wait.until(elementToBeClickable(buttonLogIn));
+        driver.findElement(buttonLogIn).click();
+
+        wait.until(textToBePresentInElementLocated(By.tagName("body"),
+                "Facebook"));
+    }
+
 }
