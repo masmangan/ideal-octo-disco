@@ -135,6 +135,7 @@ public class ChromeTest {
             
              By nextStep = By.className("formatted-header__title");
              wait.until(presenceOfElementLocated(nextStep));
+              wait.until(textToBePresentInElementLocated(nextStep,"Let's get your site"));
              assertThat(driver.findElement(nextStep).getText(), containsString("Let's get your site"));
              
         }
