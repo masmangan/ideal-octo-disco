@@ -1,88 +1,139 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
-    <groupId>io.github.bonigarcia</groupId>
-    <artifactId>webdrivermanager-examples</artifactId>
-    <version>1.0.0</version>
-    <developers>
-        <developer>
-            <id>bonigarcia</id>
-            <name>Boni Garcia</name>
-            <email>boni.gg@gmail.com</email>
-        </developer>
-    </developers>
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<modelVersion>4.0.0</modelVersion>
+<groupId>io.github.bonigarcia</groupId>
+<artifactId>webdrivermanager-examples</artifactId>
+<version>1.0.0</version>
 
-    <licenses>
-        <license>
-            <name>Apache 2.0</name>
-            <url>http://www.apache.org/licenses/LICENSE-2.0</url>
-        </license>
-    </licenses>
+<name>WebdriverManager Examples</name>
+<description>
+    Examples of usage of WebdriverManager as JUnit test cases.
+</description>
+<url>https://github.com/bonigarcia/webdrivermanager-examples</url>
 
-    <properties>
-        <maven-surefire-plugin.version>2.19.1</maven-surefire-plugin.version>
+<developers>
+    <developer>
+        <id>bonigarcia</id>
+        <name>Boni Garcia</name>
+        <email>boni.gg@gmail.com</email>
+    </developer>
+</developers>
 
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+<licenses>
+    <license>
+        <name>Apache 2.0</name>
+        <url>http://www.apache.org/licenses/LICENSE-2.0</url>
+    </license>
+</licenses>
 
-        <maven.compiler.target>1.8</maven.compiler.target>
-        <maven.compiler.source>1.8</maven.compiler.source>
+<properties>
+    <slf4j.version>1.7.25</slf4j.version>
+    <logback.version>1.2.3</logback.version>
 
-        <maven.compiler.argument.target>${maven.compiler.target}</maven.compiler.argument.target>
-        <maven.compiler.argument.source>${maven.compiler.source}</maven.compiler.argument.source>
-    </properties>
+    <junit.version>4.13.1</junit.version>
+    <selenium.version>3.141.59</selenium.version>
+    <phantomjsdriver.version>1.4.3</phantomjsdriver.version>
+    <webdrivermanager.version>3.7.1</webdrivermanager.version>
+    <testng.version>6.13</testng.version>
+    <spring-boot.version>2.1.6.RELEASE</spring-boot.version>
+    <appium-java-client.version>7.1.0</appium-java-client.version>
 
-    <dependencies>
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-api</artifactId>
-            <version>5.7.0</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>io.github.bonigarcia</groupId>
-            <artifactId>webdrivermanager</artifactId>
-            <version>4.2.2</version>
-        </dependency>
-        <dependency>
-            <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>selenium-java</artifactId>
-            <version>4.0.0-alpha-7</version>
-        </dependency>
-    </dependencies>
+    <maven-surefire-plugin.version>2.19.1</maven-surefire-plugin.version>
 
-    <build>
-        <plugins>
-            <plugin>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>${maven-surefire-plugin.version}</version>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.apache.maven.surefire</groupId>
-                        <artifactId>surefire-junit47</artifactId>
-                        <version>${maven-surefire-plugin.version}</version>
-                    </dependency>
-                </dependencies>
-                <!--
-                <inherited>true</inherited>
-                <executions>
-                    <execution>
-                        <phase>test</phase>
-                        <goals>
-                            <goal>test</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <suiteXmlFiles>
-                        <suiteXmlFile>src\test\resources\parallel.xml</suiteXmlFile>
-                    </suiteXmlFiles>
-                </configuration>
-                -->
-            </plugin>
-        </plugins>
-    </build>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+    <maven.compiler.target>1.8</maven.compiler.target>
+    <maven.compiler.source>1.8</maven.compiler.source>
+
+    <maven.compiler.argument.target>${maven.compiler.target}</maven.compiler.argument.target>
+    <maven.compiler.argument.source>${maven.compiler.source}</maven.compiler.argument.source>
+</properties>
+
+<dependencies>
+    <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>slf4j-api</artifactId>
+        <version>${slf4j.version}</version>
+    </dependency>
+    <dependency>
+        <groupId>ch.qos.logback</groupId>
+        <artifactId>logback-classic</artifactId>
+        <version>${logback.version}</version>
+    </dependency>
+    <dependency>
+        <groupId>io.github.bonigarcia</groupId>
+        <artifactId>webdrivermanager</artifactId>
+        <version>${webdrivermanager.version}</version>
+    </dependency>
+    <dependency>
+        <groupId>org.seleniumhq.selenium</groupId>
+        <artifactId>selenium-api</artifactId>
+        <version>${selenium.version}</version>
+    </dependency>
+    <dependency>
+        <groupId>junit</groupId>
+        <artifactId>junit</artifactId>
+        <version>${junit.version}</version>
+        <scope>test</scope>
+    </dependency>
+    <dependency>
+        <groupId>org.seleniumhq.selenium</groupId>
+        <artifactId>selenium-java</artifactId>
+        <version>${selenium.version}</version>
+        <scope>test</scope>
+    </dependency>
+    <dependency>
+        <groupId>commons-lang</groupId>
+        <artifactId>commons-lang</artifactId>
+        <version>2.6</version>
+        <scope>test</scope>
+    </dependency>
+</dependencies>
+
+<build>
+    <plugins>
+        <plugin>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <version>${maven-surefire-plugin.version}</version>
+            <dependencies>
+                <dependency>
+                    <groupId>org.apache.maven.surefire</groupId>
+                    <artifactId>surefire-junit47</artifactId>
+                    <version>${maven-surefire-plugin.version}</version>
+                </dependency>
+                <dependency>
+                    <groupId>io.qameta.allure</groupId>
+                    <artifactId>allure-junit5</artifactId>
+                    <version>2.13.7</version>
+                    <scope>test</scope>
+                </dependency>
+                <dependency>
+                    <groupId>ru.yandex.qatools.allure</groupId>
+                    <artifactId>allure-maven-plugin</artifactId>
+                    <version>2.6</version>
+                </dependency>
+            </dependencies>
+            <!--
+            <inherited>true</inherited>
+            <executions>
+                <execution>
+                    <phase>test</phase>
+                    <goals>
+                        <goal>test</goal>
+                    </goals>
+                </execution>
+            </executions>
+            <configuration>
+                <suiteXmlFiles>
+                    <suiteXmlFile>src\test\resources\parallel.xml</suiteXmlFile>
+                </suiteXmlFiles>
+            </configuration>
+            -->
+        </plugin>
+    </plugins>
+</build>
 
 
 </project>
