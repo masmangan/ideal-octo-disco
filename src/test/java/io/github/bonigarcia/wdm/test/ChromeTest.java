@@ -81,64 +81,80 @@ public class ChromeTest {
                 "Computer software"));
     }
     
-    	 @Test public void buscaQualidadeProdutoMoodlePucrs() { 
+    @Test 
+    public void buscaQualidadeProdutoMoodlePucrs() { 
 		 
-		 WebDriverWait wait = new WebDriverWait(driver, 30);
-		 driver.get("https://moodle.pucrs.br/");
+		WebDriverWait wait = new WebDriverWait(driver, 30);
+		driver.get("https://moodle.pucrs.br/");
 		 
-		 By user = By.id("login_username");
-		 wait.until(presenceOfElementLocated(user));
-		 driver.findElement(user).sendKeys("11109498"); 
+		By user = By.id("login_username");
+		wait.until(presenceOfElementLocated(user));
+		driver.findElement(user).sendKeys("11109498"); 
                  
-                 By pass =  By.id("login_password"); wait.until(presenceOfElementLocated(pass));
-		 driver.findElement(pass).sendKeys("SenhaIncorreta");
+            By pass =  By.id("login_password"); wait.until(presenceOfElementLocated(pass));
+		driver.findElement(pass).sendKeys("SenhaIncorreta");
 		 
-		 By searchButton = By.className("button");
-		 wait.until(elementToBeClickable(searchButton));
-		 driver.findElement(searchButton).click();
+		By searchButton = By.className("button");
+		wait.until(elementToBeClickable(searchButton));
+		driver.findElement(searchButton).click();
                  
-                 By targetInput = By.tagName("body");
-                 assertThat(driver.findElement(targetInput).getText(), containsString("4637E-02 - Qualidade de Produto"));
+            By targetInput = By.tagName("body");
+            assertThat(driver.findElement(targetInput).getText(), containsString("4637E-02 - Qualidade de Produto"));
                  
 	 }
          
          
-        @Test
-        public void signUpWordpress() {
-            WebDriverWait wait = new WebDriverWait(driver, 30);
+    @Test
+    public void signUpWordpress() {
+        WebDriverWait wait = new WebDriverWait(driver, 30);
 
-            String username = "priscilla.pucrs" + new Random().nextInt(Integer.MAX_VALUE);
-            String email = username + "@gmail.com";
-            String password = "*3pPL3D6fKjY";
+        String username = "priscilla.pucrs" + new Random().nextInt(Integer.MAX_VALUE);
+        String email = username + "@gmail.com";
+        String password = "*3pPL3D6fKjY";
 
-            driver.get("https://wordpress.com/start/user/");
+        driver.get("https://wordpress.com/start/user/");
 
-            //By joinButton = By.xpath("//a[contains(., 'Sign Up')]");
-            //wait.until(presenceOfElementLocated(joinButton));
-            //driver.findElement(joinButton).click();
+        //By joinButton = By.xpath("//a[contains(., 'Sign Up')]");
+        //wait.until(presenceOfElementLocated(joinButton));
+        //driver.findElement(joinButton).click();
 
-            By emailField = By.id("email");
-            wait.until(presenceOfElementLocated(emailField));
-            driver.findElement(emailField).sendKeys(email);
+        By emailField = By.id("email");
+        wait.until(presenceOfElementLocated(emailField));
+        driver.findElement(emailField).sendKeys(email);
 
-            By usernameField = By.id("username");
-            wait.until(presenceOfElementLocated(usernameField));
-            driver.findElement(usernameField).sendKeys(username);
+        By usernameField = By.id("username");
+        wait.until(presenceOfElementLocated(usernameField));
+        driver.findElement(usernameField).sendKeys(username);
 
-            By passwordField = By.id("password");
-            wait.until(presenceOfElementLocated(passwordField));
-            driver.findElement(passwordField).sendKeys(password);
+        By passwordField = By.id("password");
+        wait.until(presenceOfElementLocated(passwordField));
+        driver.findElement(passwordField).sendKeys(password);
 
-            By signUpButton = By.xpath("//button[contains(., 'Create your account')]");
-            wait.until(elementToBeClickable(signUpButton));
-            driver.findElement(signUpButton).click();
+        By signUpButton = By.xpath("//button[contains(., 'Create your account')]");
+        wait.until(elementToBeClickable(signUpButton));
+        driver.findElement(signUpButton).click();
             
-             By nextStep = By.className("formatted-header__title");
-             wait.until(presenceOfElementLocated(nextStep));
-              wait.until(textToBePresentInElementLocated(nextStep,"Let's get your site"));
-             assertThat(driver.findElement(nextStep).getText(), containsString("Let's get your site"));
+            By nextStep = By.className("formatted-header__title");
+            wait.until(presenceOfElementLocated(nextStep));
+            wait.until(textToBePresentInElementLocated(nextStep,"Let's get your site"));
+            assertThat(driver.findElement(nextStep).getText(), containsString("Let's get your site"));
              
         }
+
+    @Test
+    public void testLojasAmericanas() {
+        WebDriverWait wait = new WebDriverWait(driver, 30);
+        driver.get("https://www.americanas.com.br/");
+        By searchInput = By.id("h_search-input");
+        wait.until(presenceOfElementLocated(searchInput));
+        driver.findElement(searchInput).sendKeys("Livros");
+        By searchButton = By.id("h_search-btn");
+        wait.until(elementToBeClickable(searchButton));
+        driver.findElement(searchButton).click();
+
+        wait.until(textToBePresentInElementLocated(By.tagName("body"),
+                "livro - do mil ao milhão"));
+    }
          
 
 }
