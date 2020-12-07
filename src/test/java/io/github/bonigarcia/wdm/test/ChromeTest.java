@@ -36,6 +36,8 @@ import static org.hamcrest.CoreMatchers.containsString;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
+import java.util.Random;
+
 /**
  * Test with Chrome.
  *
@@ -99,6 +101,45 @@ public class ChromeTest {
                  assertThat(driver.findElement(targetInput).getText(), containsString("4637E-02 - Qualidade de Produto"));
                  
 	 }
+         
+         
+        @Test
+        public void signUpWordpress() {
+            WebDriverWait wait = new WebDriverWait(driver, 30);
+
+            String username = "priscilla.pucrs" + new Random().nextInt(Integer.MAX_VALUE);
+            String email = username + "@gmail.com";
+            String password = "*3pPL3D6fKjY";
+
+            driver.get("https://wordpress.com/start/user/");
+
+            //By joinButton = By.xpath("//a[contains(., 'Sign Up')]");
+            //wait.until(presenceOfElementLocated(joinButton));
+            //driver.findElement(joinButton).click();
+
+            By emailField = By.id("email");
+            wait.until(presenceOfElementLocated(emailField));
+            driver.findElement(emailField).sendKeys(email);
+
+            By usernameField = By.id("username");
+            wait.until(presenceOfElementLocated(usernameField));
+            driver.findElement(usernameField).sendKeys(username);
+
+            By passwordField = By.id("password");
+            wait.until(presenceOfElementLocated(passwordField));
+            driver.findElement(passwordField).sendKeys(password);
+
+            By signUpButton = By.xpath("//button[contains(., 'Create your account')]");
+            wait.until(elementToBeClickable(signUpButton));
+            driver.findElement(signUpButton).click();
+            
+             By nextStep = By.className("formatted-header__title");
+             wait.until(presenceOfElementLocated(nextStep));
+             assertThat(driver.findElement(nextStep).getText(), containsString("Let's get your site"));
+             
+        }
+         
+         
          
          
 
