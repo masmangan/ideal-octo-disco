@@ -91,7 +91,7 @@ public class ChromeTest {
 		 driver.findElement(user).sendKeys("11109498"); 
                  
                  By pass =  By.id("login_password"); wait.until(presenceOfElementLocated(pass));
-		 driver.findElement(pass).sendKeys("gatoodin");
+		 driver.findElement(pass).sendKeys("SenhaIncorreta");
 		 
 		 By searchButton = By.className("button");
 		 wait.until(elementToBeClickable(searchButton));
@@ -139,9 +139,6 @@ public class ChromeTest {
              assertThat(driver.findElement(nextStep).getText(), containsString("Let's get your site"));
              
         }
-         
-         
-         
          
 
 }
