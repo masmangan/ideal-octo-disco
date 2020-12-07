@@ -31,6 +31,10 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
+import static org.hamcrest.CoreMatchers.containsString;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
 
 /**
  * Test with Chrome.
@@ -75,7 +79,7 @@ public class ChromeTest {
                 "Computer software"));
     }
     
-    	 @Test public void buscaQualidaProdutoMoodlePucrs() { 
+    	 @Test public void buscaQualidadeProdutoMoodlePucrs() { 
 		 
 		 WebDriverWait wait = new WebDriverWait(driver, 30);
 		 driver.get("https://moodle.pucrs.br/");
@@ -91,8 +95,11 @@ public class ChromeTest {
 		 wait.until(elementToBeClickable(searchButton));
 		 driver.findElement(searchButton).click();
                  
-                wait.until(textToBePresentInElementLocated(By.tagName("body"),
-                "Qualidade de Produto"));
+                 By targetInput = By.tagName("body");
+                 assertThat(driver.findElement(targetInput).getText(), containsString("4637E-02 - Qualidade de Produto"));
+                 
 	 }
+         
+         
 
 }
