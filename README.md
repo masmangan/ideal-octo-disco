@@ -14,3 +14,5 @@ Simple Web Driver Example
 Após a instalação basta rodar o comando:
 
     allure serve project/target/surefire-reports/
+
+Após a execução do comando, o relatório é aberto no navegador padrão.
