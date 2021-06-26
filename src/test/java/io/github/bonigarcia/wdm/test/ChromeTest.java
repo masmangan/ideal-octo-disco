@@ -75,4 +75,9 @@ public class ChromeTest {
                 "Computer software"));
     }
 
+    @Test
+    public  void testSpotfyLogin(){
+
+    }
+
 }
