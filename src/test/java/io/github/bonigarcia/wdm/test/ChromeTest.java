@@ -32,6 +32,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
+import java.util.concurrent.TimeUnit;
+
 /**
  * Test with Chrome.
  *
@@ -77,7 +79,26 @@ public class ChromeTest {
 
     @Test
     public  void testSpotfyLogin(){
+        WebDriverWait wait = new WebDriverWait(driver, 30);
+        driver.manage().window().maximize();
 
+        driver.get("https://www.spotify.com/br/");
+
+        By loginMenuItem = By.linkText("Entrar");
+        driver.findElement(loginMenuItem).click();
+
+        wait.until(elementToBeClickable(By.id("login-username")));
+
+        By inputName = By.id("login-username");
+        By inputPassword = By.id("login-password");
+
+        driver.findElement(inputName).sendKeys("Teste");
+        driver.findElement(inputPassword).sendKeys("Teste");
+        try{TimeUnit.SECONDS.sleep(3);}catch(InterruptedException ex){Thread.currentThread().interrupt();}
+        By loginButton = By.id("login-button");
+        driver.findElement(loginButton).click();
+
+        wait.until(textToBePresentInElementLocated(By.tagName("body"),
+                "Nome de usuário ou senha incorretos."));
     }
-
 }
