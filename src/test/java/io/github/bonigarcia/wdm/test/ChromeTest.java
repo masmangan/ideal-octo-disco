@@ -26,12 +26,12 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
 import io.github.bonigarcia.wdm.WebDriverManager;
-
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -61,6 +61,7 @@ public class ChromeTest {
         }
     }
 
+    /*
     @Test
     public void test() {
         // Your test code here. For example:
@@ -76,6 +77,7 @@ public class ChromeTest {
         wait.until(textToBePresentInElementLocated(By.tagName("body"),
                 "Computer software"));
     }
+    */
 
     @Test
     public  void testSpotfyLogin(){
@@ -101,4 +103,21 @@ public class ChromeTest {
         wait.until(textToBePresentInElementLocated(By.tagName("body"),
                 "Nome de usuário ou senha incorretos."));
     }
+
+    @Test
+    public void testCarraoNoOlx()  {
+        WebDriverWait wait = new WebDriverWait(driver, 50);
+        driver.get("https://olx.com.br/");
+        WebElement elemento = driver.findElement(By.name("q"));
+        elemento.click();
+        By searchInput = By.id("searchtext");
+        wait.until(presenceOfElementLocated(searchInput));
+        driver.findElement(searchInput).sendKeys("R8 5.2 V10", Keys.ENTER);
+        driver.findElement(By.id("ad-list")).findElement(By.partialLinkText("QUATTRO")).click();
+        try{TimeUnit.SECONDS.sleep(5);}catch(InterruptedException ex){Thread.currentThread().interrupt();}
+        //wait.until(presenceOfElementLocated(By.partialLinkText("QUATTRO")));
+
+    }
+
+
 }
