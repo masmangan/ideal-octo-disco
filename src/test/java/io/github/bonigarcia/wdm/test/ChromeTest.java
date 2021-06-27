@@ -30,6 +30,7 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.support.ui.Select;
 import io.github.bonigarcia.wdm.WebDriverManager;
@@ -82,8 +83,10 @@ public class ChromeTest {
 
     @Test
     public void testCarraoNoOlx()  {
-        WebDriverWait wait = new WebDriverWait(driver, 50);
+        WebDriverWait wait = new WebDriverWait(driver, 30);
+        driver.manage().window().maximize();
         driver.get("https://olx.com.br/");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("searchSubmitBtn")));
         WebElement elemento = driver.findElement(By.name("q"));
         elemento.click();
         By searchInput = By.id("searchtext");
@@ -91,17 +94,17 @@ public class ChromeTest {
         driver.findElement(searchInput).sendKeys("R8 5.2 V10", Keys.ENTER);
         driver.findElement(By.id("ad-list")).findElement(By.partialLinkText("QUATTRO")).click();
         try{TimeUnit.SECONDS.sleep(5);}catch(InterruptedException ex){Thread.currentThread().interrupt();}
-        //wait.until(presenceOfElementLocated(By.partialLinkText("QUATTRO")));
+        wait.until(presenceOfElementLocated(By.partialLinkText("QUATTRO")));
     }
 
 
     @Test
-    public  void testSpotfyLogin(){
+    public  void testSpotfyLoginFail()  {
         WebDriverWait wait = new WebDriverWait(driver, 30);
         driver.manage().window().maximize();
 
         driver.get("https://www.spotify.com/br/");
-
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.linkText("Entrar")));
         By loginMenuItem = By.linkText("Entrar");
         driver.findElement(loginMenuItem).click();
 
@@ -112,21 +115,21 @@ public class ChromeTest {
 
         driver.findElement(inputName).sendKeys("Teste");
         driver.findElement(inputPassword).sendKeys("Teste");
-        try{TimeUnit.SECONDS.sleep(3);}catch(InterruptedException ex){Thread.currentThread().interrupt();}
         By loginButton = By.id("login-button");
         driver.findElement(loginButton).click();
-
+        try{TimeUnit.SECONDS.sleep(2);}catch(InterruptedException ex){Thread.currentThread().interrupt();}
+        //driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         wait.until(textToBePresentInElementLocated(By.tagName("body"),
                 "Nome de usuário ou senha incorretos."));
     }
 
 
     @Test
-    public void testSignUpSpotfy()   {
+    public void testSpotfySignUpFail()   {
         WebDriverWait wait = new WebDriverWait(driver, 30);
         driver.manage().window().maximize();
         driver.get("https://www.spotify.com/br/");
-        try{TimeUnit.SECONDS.sleep(2);}catch(InterruptedException ex){Thread.currentThread().interrupt();}
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.linkText("Inscrever-se")));
         By loginMenuItem = By.linkText("Inscrever-se");
         driver.findElement(loginMenuItem).click();
 
@@ -150,7 +153,7 @@ public class ChromeTest {
 
         By signUpButton = By.xpath("//*[@id=\"__next\"]/main/div[2]/div/form/div[10]/div/button/div[1]");
         driver.findElement(signUpButton).click();
-
+        try{TimeUnit.SECONDS.sleep(2);}catch(InterruptedException ex){Thread.currentThread().interrupt();}
         wait.until(textToBePresentInElementLocated(By.tagName("body"),
                 "Confirme que você não é um robô."));
     }
