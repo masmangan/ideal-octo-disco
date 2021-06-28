@@ -60,48 +60,34 @@ public class ChromeTest {
     }
 
     @Test
-    public void testNaruto() {
+    public void testMars() {
         // Your test code here. For example:
         WebDriverWait wait = new WebDriverWait(driver, 30);
-        driver.get("https://pt.wikipedia.org/wiki/Wikip%C3%A9dia:P%C3%A1gina_principal");
+        driver.get("https://en.wikipedia.org/wiki/Main_Page");
         By searchInput = By.id("searchInput");
         wait.until(presenceOfElementLocated(searchInput));
-        driver.findElement(searchInput).sendKeys("Naruto");
+        driver.findElement(searchInput).sendKeys("geology of mars");
         By searchButton = By.id("searchButton");
         wait.until(elementToBeClickable(searchButton));
         driver.findElement(searchButton).click();
-        wait.until(textToBePresentInElementLocated(By.tagName("body"),
-                "Raposa de Nove Caudas"));
+        wait.until(textToBePresentInElementLocated(
+            By.tagName("body"), "areology")
+        );
     }
     
     @Test
-    public void testSasuke() {
-        // Your test code here. For example:
-        WebDriverWait wait = new WebDriverWait(driver, 30);
-        driver.get("https://pt.wikipedia.org/wiki/Wikip%C3%A9dia:P%C3%A1gina_principal");
-        By searchInput = By.id("searchInput");
-        wait.until(presenceOfElementLocated(searchInput));
-        driver.findElement(searchInput).sendKeys("Sasuke");
-        By searchButton = By.id("searchButton");
-        wait.until(elementToBeClickable(searchButton));
-        driver.findElement(searchButton).click();
-        wait.until(textToBePresentInElementLocated(By.tagName("body"),
-                "Mangekyou Sharingan"));
-    }
-    
-    @Test
-    public void testWikipediaLibertadores17() {
+    public void testByte() {
     	 WebDriverWait wait = new WebDriverWait(driver, 30);
-         driver.get("https://pt.wikipedia.org/wiki/Wikip%C3%A9dia:P%C3%A1gina_principal");
+         driver.get("https://en.wikipedia.org/wiki/Main_Page");
          By searchInput = By.id("searchInput");
          wait.until(presenceOfElementLocated(searchInput));
-         driver.findElement(searchInput).sendKeys("Libertadores 2017");
+         driver.findElement(searchInput).sendKeys("byte");
          By searchButton = By.id("searchButton");
          wait.until(elementToBeClickable(searchButton));
          driver.findElement(searchButton).click();
-
-         wait.until(textToBePresentInElementLocated(By.tagName("body"),
-                 "Grêmio"));
+         wait.until(textToBePresentInElementLocated(
+            By.tagName("body"), "Werner Buchholz")
+        );
     }
     
     @Test
