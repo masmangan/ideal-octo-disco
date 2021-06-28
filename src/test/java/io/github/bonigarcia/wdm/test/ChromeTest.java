@@ -17,8 +17,6 @@
 
 package io.github.bonigarcia.wdm.test;
 
-import static org.openqa.selenium.support.ui.ExpectedConditions.elementToBeClickable;
-import static org.openqa.selenium.support.ui.ExpectedConditions.presenceOfElementLocated;
 import static org.openqa.selenium.support.ui.ExpectedConditions.textToBePresentInElementLocated;
 
 import org.junit.After;
@@ -60,11 +58,18 @@ public class ChromeTest {
     }
 
     @Test
-    public void test() {
+    public void testAddPetWithExistingOwner() throws InterruptedException {
         // Your test code here. For example:
         WebDriverWait wait = new WebDriverWait(driver, 30);
-        driver.get("https://en.wikipedia.org/wiki/Main_Page");
-        By searchInput = By.id("searchInput");
+        driver.get("http://10.32.161.142:8080/owners/4");
+        driver.findElement(By.xpath("/html/body/div/div/a[2]")).click();
+        driver.findElement(By.xpath("//*[@id=\"name\"]")).sendKeys("Jorgisss");
+        driver.findElement(By.xpath("//*[@id=\"birthDate\"]")).sendKeys("1995-05-21");
+        driver.findElement(By.xpath("/html/body/div/div/form/div[2]/div/button")).click();
+        wait.until(textToBePresentInElementLocated(By.tagName("body"),
+                "Jorgisss"));
+        
+        /*
         wait.until(presenceOfElementLocated(searchInput));
         driver.findElement(searchInput).sendKeys("Software");
         By searchButton = By.id("searchButton");
@@ -73,6 +78,7 @@ public class ChromeTest {
 
         wait.until(textToBePresentInElementLocated(By.tagName("body"),
                 "Computer software"));
+                */
     }
 
 }
