@@ -34,6 +34,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.support.ui.Select;
 import io.github.bonigarcia.wdm.WebDriverManager;
+
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -71,7 +72,7 @@ public class ChromeTest {
      * driver.findElement(searchInput).sendKeys("Software"); By searchButton =
      * By.id("searchButton"); wait.until(elementToBeClickable(searchButton));
      * driver.findElement(searchButton).click();
-     * 
+     *
      * wait.until(textToBePresentInElementLocated(By.tagName("body"),
      * "Computer software")); }
      */
@@ -82,8 +83,7 @@ public class ChromeTest {
         driver.manage().window().maximize(); // abre o browser definido: chromedriver
         driver.get("https://olx.com.br/"); // busca o site do OLX pelo endereço
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("searchSubmitBtn")));
-        WebElement elemento = driver.findElement(By.name("q")); // procura no codigo um elemento do tipo find com o nome
-                                                                // 'q'
+        WebElement elemento = driver.findElement(By.name("q")); // procura no codigo um elemento com nome 'q'
         elemento.click(); // clica no elemento retornado para selecioná-lo
         By searchInput = By.id("searchtext"); // localiza o mesmo elemento pelo id 'searchtext'
         wait.until(presenceOfElementLocated(searchInput));
@@ -92,11 +92,12 @@ public class ChromeTest {
         driver.findElement(By.id("ad-list")).findElement(By.partialLinkText("QUATTRO")).click(); // localiza dentro da
         // lista de resultados 'ad-list' o link com a palavra chave 'QUATTRO' e clica
         // nele, mostrando o resultado
+
         try {
             TimeUnit.SECONDS.sleep(5);
         } catch (InterruptedException ex) {
             Thread.currentThread().interrupt();
-        }
+        } // Time Filler
         wait.until(presenceOfElementLocated(By.partialLinkText("QUATTRO")));
     }
 
@@ -119,11 +120,13 @@ public class ChromeTest {
         driver.findElement(inputPassword).sendKeys("Teste"); // no campo login-password insere a palavra-chave "teste"
         By loginButton = By.id("login-button");
         driver.findElement(loginButton).click(); // localiza e clica no botao com id "login-button"
+
         try {
-            TimeUnit.SECONDS.sleep(2); // fecha o browser
+            TimeUnit.SECONDS.sleep(2);
         } catch (InterruptedException ex) {
             Thread.currentThread().interrupt();
-        }
+        } // Time filler
+
         // driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         wait.until(textToBePresentInElementLocated(By.tagName("body"), "Nome de usuário ou senha incorretos."));
     }
@@ -149,21 +152,22 @@ public class ChromeTest {
         driver.findElement(displayName).sendKeys("test01");
         driver.findElement(By.id("day")).sendKeys("11");
         Select month = new Select(driver.findElement(By.id("month")));
-        month.selectByValue("10");
+        month.selectByValue("10"); // escolhe o mes de outubro no dropdown menu
         driver.findElement(By.id("year")).sendKeys("1990");
         driver.findElement(By.xpath("//label[@for='gender_option_male']")).click(); // seleciona o genero masculino
-        driver.findElement(By.xpath("//label[@for='marketing-opt-checkbox']")).click(); // aceita o recebimento de
-                                                                                        // marketing
-        driver.findElement(By.xpath("//label[@for='terms-conditions-checkbox']")).click(); // aceita os termos de uso
+        driver.findElement(By.xpath("//label[@for='marketing-opt-checkbox']")).click(); // aceita o recebimento de marketing
+        driver.findElement(By.xpath("//label[@for='terms-conditions-checkbox']/span[1]")).click(); // aceita os termos de uso
 
-        By signUpButton = By.xpath("//*[@id=\"__next\"]/main/div[2]/div/form/div[10]/div/button/div[1]");
-        driver.findElement(signUpButton).click();
+        driver.findElement(By.cssSelector("button[type='submit']")).click(); // procura o botao submit
+
+
         try {
             TimeUnit.SECONDS.sleep(2);
         } catch (InterruptedException ex) {
             Thread.currentThread().interrupt();
-        }
-        wait.until(textToBePresentInElementLocated(By.tagName("body"), "Confirme que você não é um robô."));
+        } //Time Filler
+
+        wait.until(textToBePresentInElementLocated(By.tagName("body"), "Confirme que você não é um robô.")); // espera pela menssagem de erro
     }
 
 }
