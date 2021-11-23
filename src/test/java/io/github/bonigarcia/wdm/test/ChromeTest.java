@@ -17,6 +17,7 @@
 
 package io.github.bonigarcia.wdm.test;
 
+import static org.junit.Assert.assertEquals;
 import static org.openqa.selenium.support.ui.ExpectedConditions.elementToBeClickable;
 import static org.openqa.selenium.support.ui.ExpectedConditions.presenceOfElementLocated;
 import static org.openqa.selenium.support.ui.ExpectedConditions.textToBePresentInElementLocated;
@@ -26,11 +27,16 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
+
+import java.util.concurrent.TimeUnit;
 
 /**
  * Test with Chrome.
@@ -75,4 +81,40 @@ public class ChromeTest {
                 "Computer software"));
     }
 
+    @Test
+    public void testOlxSearchAnuncio() throws InterruptedException {
+        WebDriverWait wait = new WebDriverWait(driver, 30);
+        driver.get("https://rs.olx.com.br/");
+
+        WebElement elemento = driver.findElement(By.name("q"));
+        elemento.click();
+
+        By searchInput = By.id("searchtext");
+        wait.until(presenceOfElementLocated(searchInput));
+        driver.findElement(searchInput).sendKeys("cbr 600 rr", Keys.ENTER);
+
+        wait.until(textToBePresentInElementLocated(By.tagName("body"),
+                "R$ 28.000"));
+    }
+
+    @Test
+    public void testSearchLeilao() throws InterruptedException {
+        WebDriverWait wait = new WebDriverWait(driver, 30);
+        driver.get("https://www.leiloes.com.br");
+        By closePopUp = By.id("botaoFecharBanner");
+        Thread.sleep(10000);
+        wait.until(elementToBeClickable(closePopUp));
+        driver.findElement(closePopUp).click();
+
+        By menuPesquisa = By.xpath("//*[@id=\"content\"]/div/div[2]/div[1]/div/span/span[1]/button/span");
+        wait.until(elementToBeClickable(menuPesquisa));
+        driver.findElement(menuPesquisa).click();
+
+        By inputPesquisa = By.name("texto");
+        wait.until(presenceOfElementLocated(inputPesquisa));
+        driver.findElement(inputPesquisa).sendKeys("cbr", Keys.ENTER);
+
+        wait.until(textToBePresentInElementLocated(By.tagName("body"),
+                "Nenhum lote para esta categoria"));
+    }
 }
