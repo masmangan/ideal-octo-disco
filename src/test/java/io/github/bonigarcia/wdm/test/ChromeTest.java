@@ -52,27 +52,44 @@ public class ChromeTest {
         driver = new ChromeDriver();
     }
 
-    @After
-    public void teardown() {
-        if (driver != null) {
-            driver.quit();
-        }
-    }
+//    @After
+//    public void teardown() {
+//        if (driver != null) {
+//            driver.quit();
+//        }
+//    }
+
+//    @Test
+//    public void test() {
+//        // Your test code here. For example:
+//        WebDriverWait wait = new WebDriverWait(driver, 30);
+//        driver.get("https://en.wikipedia.org/wiki/Main_Page");
+//        By searchInput = By.id("searchInput");
+//        wait.until(presenceOfElementLocated(searchInput));
+//        driver.findElement(searchInput).sendKeys("Software");
+//        By searchButton = By.id("searchButton");
+//        wait.until(elementToBeClickable(searchButton));
+//        driver.findElement(searchButton).click();
+//
+//        wait.until(textToBePresentInElementLocated(By.tagName("body"),
+//                "Computer software"));
+//    }
 
     @Test
-    public void test() {
-        // Your test code here. For example:
-        WebDriverWait wait = new WebDriverWait(driver, 30);
-        driver.get("https://en.wikipedia.org/wiki/Main_Page");
-        By searchInput = By.id("searchInput");
-        wait.until(presenceOfElementLocated(searchInput));
-        driver.findElement(searchInput).sendKeys("Software");
-        By searchButton = By.id("searchButton");
-        wait.until(elementToBeClickable(searchButton));
-        driver.findElement(searchButton).click();
-
-        wait.until(textToBePresentInElementLocated(By.tagName("body"),
-                "Computer software"));
+    public void testForm() {
+        driver.get("https://lojadosherois.com.br/account/register/");
+        By name = By.id("name");
+        driver.findElement(name).sendKeys("Brenda");
+        By email = By.name("email");
+        driver.findElement(email).sendKeys("brenda.david@acad.pucrs.br");
+        By phone = By.name("phone");
+        driver.findElement(email).sendKeys("51983588889");
+        By password = By.name("password");
+        driver.findElement(password).sendKeys("testeT3!");
+        By confirmPassword = By.name("password_confirmation");
+        driver.findElement(confirmPassword).sendKeys("testeT3!");
+        By login = By.name("submit");
+        driver.findElement(login).click();
     }
 
 }
