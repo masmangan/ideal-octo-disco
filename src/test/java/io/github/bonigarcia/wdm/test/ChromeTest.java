@@ -59,23 +59,17 @@ public class ChromeTest {
 //        }
 //    }
 
-//    @Test
-//    public void test() {
-//        // Your test code here. For example:
-//        WebDriverWait wait = new WebDriverWait(driver, 30);
-//        driver.get("https://en.wikipedia.org/wiki/Main_Page");
-//        By searchInput = By.id("searchInput");
-//        wait.until(presenceOfElementLocated(searchInput));
-//        driver.findElement(searchInput).sendKeys("Software");
-//        By searchButton = By.id("searchButton");
-//        wait.until(elementToBeClickable(searchButton));
-//        driver.findElement(searchButton).click();
-//
-//        wait.until(textToBePresentInElementLocated(By.tagName("body"),
-//                "Computer software"));
-//    }
+ @Test
+    public void testSearch() {
+        WebDriverWait wait = new WebDriverWait(driver, 30);
+        driver.get("https://www.americanas.com.br/");
+        By searchInput = By.id("h_search-input");
+        driver.findElement(searchInput).sendKeys("Celular");
+        By searchButton = By.id("h_search-btn");
+        driver.findElement(searchButton).click();
+ }
 
-    @Test
+ @Test
     public void testForm() {
         driver.get("https://lojadosherois.com.br/account/register/");
         By name = By.id("name");
@@ -90,6 +84,6 @@ public class ChromeTest {
         driver.findElement(confirmPassword).sendKeys("testeT3!");
         By login = By.name("submit");
         driver.findElement(login).click();
-    }
+  }
 
 }
