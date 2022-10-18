@@ -17,6 +17,7 @@
 
 package io.github.bonigarcia.wdm.test;
 
+import static org.junit.Assert.assertEquals;
 import static org.openqa.selenium.support.ui.ExpectedConditions.elementToBeClickable;
 import static org.openqa.selenium.support.ui.ExpectedConditions.presenceOfElementLocated;
 import static org.openqa.selenium.support.ui.ExpectedConditions.textToBePresentInElementLocated;
@@ -62,17 +63,72 @@ public class ChromeTest {
     @Test
     public void test() {
         // Your test code here. For example:
-        WebDriverWait wait = new WebDriverWait(driver, 30);
+        WebDriverWait wait = new WebDriverWait(driver, 10);
         driver.get("https://en.wikipedia.org/wiki/Main_Page");
         By searchInput = By.id("searchInput");
         wait.until(presenceOfElementLocated(searchInput));
-        driver.findElement(searchInput).sendKeys("Software");
+        driver.findElement(searchInput).sendKeys("covid");
         By searchButton = By.id("searchButton");
         wait.until(elementToBeClickable(searchButton));
         driver.findElement(searchButton).click();
 
         wait.until(textToBePresentInElementLocated(By.tagName("body"),
-                "Computer software"));
+               "disease"));
     }
+    @Test
+    public void testConjugaMe() {
+        // Your test code here. For example:
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+        driver.get("https://conjuga-me.net/");
+        By searchInput = By.id("insert");
+        wait.until(presenceOfElementLocated(searchInput));
+        driver.findElement(searchInput).sendKeys("Ser");
+        By searchButton = By.id("conj-button");
+        wait.until(elementToBeClickable(searchButton));
+        driver.findElement(searchButton).click();
+
+
+    }
+    
+    @Test
+    public void testAddSupport() {
+        // Your test code here. For example:
+        WebDriverWait wait = new WebDriverWait(driver, 300);
+        By btnAddSupport = By.linkText("Enviar para o Suporte");
+        wait.until(presenceOfElementLocated(btnAddSupport));
+        wait.until(elementToBeClickable(btnAddSupport));
+        driver.findElement(btnAddSupport).click();
+
+        assertEquals("https://safeweb.com.br/suporte/", driver.getCurrentUrl());
+
+        By NomeC = By.id("nome");
+        By emailC = By.id("email");
+        By telC = By.id("tel");
+        By CpfCnpjC = By.id("CpfCnpj");
+        By duvidaC = By.id("duvida");
+        btnAddSupport = By.xpath("//*[@id='enviar']/div[2]/div/button");
+
+        wait.until(presenceOfElementLocated(telC));
+
+        String nome = "Nome";
+        String email = "nome@gmail.com";
+        String tel = "980988768";
+        String CpfCnpj = "02126698009";
+        String duvida = "teste";
+
+        driver.findElement(NomeC).sendKeys(nome);
+        driver.findElement(emailC).sendKeys(email);
+        driver.findElement(telC).sendKeys(tel);
+        driver.findElement(CpfCnpjC).sendKeys(CpfCnpj);
+        driver.findElement(duvidaC).sendKeys(duvida);
+
+        driver.findElement(btnAddSupport).click();
+
+       /* By btnEditOwners = By.linkText("Edit Owner");
+        wait.until(presenceOfElementLocated(btnEditOwners));
+        wait.until(elementToBeClickable(btnEditOwners));*/
+    }
+
+    
 
 }
